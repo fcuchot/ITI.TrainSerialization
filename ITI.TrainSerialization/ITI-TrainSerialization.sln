@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.TrainSerialization.Tests", "ITI.PrimarySchool.Tests\ITI.TrainSerialization.Tests.csproj", "{123DD212-18D2-4E29-B422-63B252717AE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.TrainSerialization.Tests", "ITI.TrainSerialization.Tests\ITI.TrainSerialization.Tests.csproj", "{123DD212-18D2-4E29-B422-63B252717AE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.TrainSerialization", "ITI.PrimarySchool\ITI.TrainSerialization.csproj", "{0550EB86-1842-4D79-9908-3F8BB246B3A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.TrainSerialization", "ITI.TrainSerialization\ITI.TrainSerialization.csproj", "{0550EB86-1842-4D79-9908-3F8BB246B3A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
