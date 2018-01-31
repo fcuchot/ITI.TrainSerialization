@@ -8,8 +8,10 @@ namespace ITI.TrainSerialization.Interfaces
         string Name { get; }
         ICity City { get; }
         IEnumerable<IStation> Stations { get; }
+        IEnumerable<ITrain> Trains { get; }
         IStation Previous(IStation s);
         IStation Next(IStation s);
-        void Add(StationPositioning positioning, IStation s);
+        void AddBefore(IStation toAdd, IStation before = null);
+        void Remove(IStation s);
     }
 }

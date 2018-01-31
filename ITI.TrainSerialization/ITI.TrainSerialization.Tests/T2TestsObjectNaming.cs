@@ -7,7 +7,7 @@ using ITI.TrainSerialization;
 namespace ITI.TrainEval.Tests
 {
     [TestFixture]
-    class T2ObjectsNaming
+    class T2TestsObjectNaming
     {
         [Test]
         public void T1_companies_can_be_found_by_name()

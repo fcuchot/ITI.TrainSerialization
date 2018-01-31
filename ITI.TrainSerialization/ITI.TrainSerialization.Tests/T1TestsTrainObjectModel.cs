@@ -11,7 +11,7 @@ using ITI.TrainSerialization.Interfaces;
 namespace ITI.TrainSerialization.Tests
 {
     [TestFixture]
-    public class TestTrainObjectModel
+     class T1TestsTrainObjectModel
     {
         [Test]
         public void T1_creating_named_cities()
