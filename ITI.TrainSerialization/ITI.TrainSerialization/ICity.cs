@@ -2,13 +2,17 @@
 {
     public interface ICity
     {
+
         string Name { get; }
         ICompany AddCompany(string name);
         ICompany FindCompany(string name);
         ILine AddLine(string name);
         ILine FindLine(string name);
-        IStation AddStation(string name,int x,int y);
+        IStation AddStation(string name, int x, int y);
         IStation FindStation(string name);
+        IStation FindNearestStation(int x, int y);
+        bool CanGo(IStation from, IStation to);
+
 
     }
 }
