@@ -4,7 +4,7 @@ using NUnit.Framework;
 using ITI.TrainSerialization.Interfaces;
 using ITI.TrainSerialization;
 
-namespace ITI.TrainEval.Tests
+namespace ITI.TrainSerialization.Tests
 {
     [TestFixture]
     class T2TestsObjectNaming

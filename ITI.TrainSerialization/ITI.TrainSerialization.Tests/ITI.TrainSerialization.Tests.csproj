@@ -50,7 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestTrainObjectModel.cs" />
+    <Compile Include="T1TestsTrainObjectModel.cs" />
+    <Compile Include="T2TestsObjectNaming.cs" />
+    <Compile Include="T3TestsTrainLine.cs" />
+    <Compile Include="T4TestsLineStation.cs" />
+    <Compile Include="T5TestsTravelling.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ITI.TrainSerialization\ITI.TrainSerialization.csproj">
