@@ -50,14 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PublicModelChecker.cs" />
-    <Compile Include="SeriallizatiobnTests.cs" />
-    <Compile Include="T1SchoolObjectsLifeCycle.cs" />
-    <Compile Include="T2SchoolObjectsNaming.cs" />
-    <Compile Include="T3TeacherClassroomAssignation.cs" />
+    <Compile Include="TestTrainObjectModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ITI.PrimarySchool\ITI.TrainSerialization.csproj">
+    <ProjectReference Include="..\ITI.TrainSerialization\ITI.TrainSerialization.csproj">
       <Project>{0550eb86-1842-4d79-9908-3f8bb246b3a7}</Project>
       <Name>ITI.TrainSerialization</Name>
     </ProjectReference>

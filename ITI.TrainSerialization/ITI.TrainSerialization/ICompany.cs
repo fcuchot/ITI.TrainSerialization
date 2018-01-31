@@ -1,4 +1,4 @@
-﻿namespace ITI.TrainEval.Interfaces
+﻿namespace ITI.TrainSerialization.Interfaces
 {
     public interface ICompany 
     {

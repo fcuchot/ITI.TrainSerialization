@@ -1,7 +1,7 @@
-﻿using ITI.TrainEval.Utils;
+﻿using ITI.TrainSerialization.Utils;
 using System.Collections.Generic;
 
-namespace ITI.TrainEval.Interfaces
+namespace ITI.TrainSerialization.Interfaces
 {
     public interface ILine
     {
