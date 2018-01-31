@@ -2,7 +2,7 @@
 using ITI.TrainSerialization.Interfaces;
 using NUnit.Framework;
 
-namespace ITI.TrainEval.Tests
+namespace ITI.TrainSerialization.Tests
 {
     [TestFixture]
     class T5TestsTravelling
