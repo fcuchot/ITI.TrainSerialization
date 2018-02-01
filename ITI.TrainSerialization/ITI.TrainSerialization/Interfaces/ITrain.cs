@@ -1,4 +1,5 @@
-﻿namespace ITI.TrainSerialization.Interfaces
+﻿
+namespace ITI.TrainSerialization.Interfaces
 {
     public interface ITrain
     {

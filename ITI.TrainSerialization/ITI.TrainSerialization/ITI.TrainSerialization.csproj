@@ -7,8 +7,8 @@
     <ProjectGuid>{0550EB86-1842-4D79-9908-3F8BB246B3A7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ITI.PrimarySchool</RootNamespace>
-    <AssemblyName>ITI.PrimarySchool</AssemblyName>
+    <RootNamespace>ITI.TrainSerialization</RootNamespace>
+    <AssemblyName>ITI.TrainSerialization</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -41,6 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CityFactory.cs" />
+    <Compile Include="Classes\City.cs" />
+    <Compile Include="Classes\Company.cs" />
+    <Compile Include="Classes\FreightTrain.cs" />
+    <Compile Include="Classes\Line.cs" />
+    <Compile Include="Classes\PassengerTrain.cs" />
+    <Compile Include="Classes\Station.cs" />
+    <Compile Include="Classes\Train.cs" />
     <Compile Include="Interfaces\ICity.cs" />
     <Compile Include="Interfaces\ICompany.cs" />
     <Compile Include="Interfaces\IFreightTrain.cs" />

@@ -1,6 +1,6 @@
 ﻿namespace ITI.TrainSerialization.Interfaces
 {
-    public interface ICompany 
+    public interface ICompany
     {
         string Name { get; }
         ICity City { get; }
