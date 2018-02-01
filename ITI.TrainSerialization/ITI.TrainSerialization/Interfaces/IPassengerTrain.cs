@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ITI.TrainSerialization.Interfaces;
-namespace ITI.PrimarySchool.Interfaces
+namespace ITI.TrainSerialization.Interfaces
 {
     public interface IPassengerTrain : ITrain
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITI.PrimarySchool.Interfaces
+namespace ITI.TrainSerialization.Interfaces
 {
     public interface IFreightTrain : ITrain
     {
