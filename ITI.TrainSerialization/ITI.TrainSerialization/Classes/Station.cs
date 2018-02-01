@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ITI.TrainSerialization.Classes
 {
-    internal class Station: IStation
+    internal class Station : IStation
     {
         string _name;
         ICity _city;
@@ -15,13 +15,22 @@ namespace ITI.TrainSerialization.Classes
         int _y;
         IEnumerable<ILine> _lines;
 
-        public Station(string name, ICity city, int x, int y, IEnumerable<ILine> lines)
+        internal Station(string name, ICity city, int x, int y, IEnumerable<ILine> lines)
         {
             Name = name;
             City = city;
             X = x;
             Y = y;
             Lines = lines;
+        }
+
+        internal Station(string name, ICity city, int x, int y)
+        {
+            Name = name;
+            City = city;
+            X = x;
+            Y = y;
+
         }
 
         public string Name { get => _name; set => _name = value; }

@@ -22,10 +22,17 @@ namespace ITI.TrainSerialization.Classes
             TrainList = trainList;
         }
 
+        internal Company(string name, ICity city)
+        {
+            Name = name;
+            City = city;
+            TrainList = new List<ITrain>();
+        }
+
         public string Name
         {
             get { return _name; }
-            set
+            private set
             {
                 if (_name != value)
                 {
@@ -38,12 +45,11 @@ namespace ITI.TrainSerialization.Classes
         public ICity City
         {
             get { return _city; }
-            set
+            private set
             {
                 if (_city != value)
                 {
-                    if (value != null) throw new ArgumentException();
-                    _city = value;
+                    _city = value ?? throw new ArgumentException();
                 }
             }
         }
@@ -54,19 +60,32 @@ namespace ITI.TrainSerialization.Classes
             {
                 if (_trainList != value)
                 {
-                    if (value != null) throw new ArgumentException();
-                    _trainList = value;
+                    _trainList = value ?? throw new ArgumentException();
                 }
             }
         }
 
         public ITrain AddTrain(string name)
         {
-            throw new NotImplementedException();
+            if (name == null || name == String.Empty)
+                throw new ArgumentException();
+
+            var TrainWithSameNameAlreadyExist = FindTrain(name);
+
+            if (TrainWithSameNameAlreadyExist != null)
+                throw new ArgumentException("a train with the same name already exist for this company");
+
+            ITrain newTrain = new Train(name, this, this.City);
+            _trainList.Add(newTrain);
+
+            return newTrain;
         }
         public ITrain FindTrain(string name)
         {
-            throw new NotImplementedException();
+            if (_trainList.Any(item => item.Name == name))
+                return _trainList.First(item => item.Name == name);
+
+            return null;
         }
     }
 }

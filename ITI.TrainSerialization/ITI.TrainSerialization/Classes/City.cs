@@ -22,10 +22,18 @@ namespace ITI.TrainSerialization.Classes
             LineList = lineList;
         }
 
+        internal City(string name)
+        {
+            Name = name;
+            StationList = new List<IStation>();
+            CompanyList = new List<ICompany>();
+            LineList = new List<ILine>();
+        }
+
         public string Name
         {
             get { return _name; }
-            set
+            private set
             {
                 if (_name != value)
                 {
@@ -73,29 +81,72 @@ namespace ITI.TrainSerialization.Classes
 
         public ICompany AddCompany(string name)
         {
-            throw new NotImplementedException();
+            if (name == null || name == String.Empty)
+                throw new ArgumentException();
+
+            var CompanyWithSameNameAlreadyExist = FindCompany(name);
+
+            if (CompanyWithSameNameAlreadyExist != null)
+                throw new ArgumentException("a company with the same name already exist for this city");
+
+            ICompany newCompany = new Company(name, this);
+            _companyList.Add(newCompany);
+
+            return newCompany;
         }
+
         public ICompany FindCompany(string name)
         {
-            throw new NotImplementedException();
+            if (_companyList.Any(item => item.Name == name))
+                return _companyList.First(item => item.Name == name);
+
+            return null;
         }
         public ILine AddLine(string name)
         {
-            throw new NotImplementedException();
+            if (name == null || name == String.Empty)
+                throw new ArgumentException();
+
+            var LineWithSameNameAlreadyExist = FindLine(name);
+
+            if (LineWithSameNameAlreadyExist != null)
+                throw new ArgumentException("a line with the same name already exist for this city");
+
+            ILine newLine = new Line(name, this);
+            _lineList.Add(newLine);
+
+            return newLine;
         }
 
         public ILine FindLine(string name)
         {
-            throw new NotImplementedException();
+            if (_lineList.Any(item => item.Name == name))
+                return _lineList.First(item => item.Name == name);
+
+            return null;
         }
         public IStation AddStation(string name, int x, int y)
         {
-            throw new NotImplementedException();
+            if (name == null || name == String.Empty)
+                throw new ArgumentException();
+
+            var StationWithSameNameAlreadyExist = FindStation(name);
+
+            if (StationWithSameNameAlreadyExist != null)
+                throw new ArgumentException("a line with the same name already exist for this city");
+
+            IStation newStation = new Station(name, this, x, y);
+            _stationList.Add(newStation);
+
+            return newStation;
         }
 
         public IStation FindStation(string name)
         {
-            throw new NotImplementedException();
+            if (_stationList.Any(item => item.Name == name))
+                return _stationList.First(item => item.Name == name);
+
+            return null;
         }
         public IStation FindNearestStation(int x, int y)
         {

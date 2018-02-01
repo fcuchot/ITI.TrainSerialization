@@ -149,8 +149,8 @@ namespace ITI.TrainSerialization.Tests
             IStation p2 = s.AddStation("Chatelet", 1, 1);
             p2.City.Should().BeSameAs(s);
             p2.Name.Should().BeEquivalentTo("Chatelet");
-            p2.X.Should().Be(0);
-            p2.Y.Should().Be(0);
+            p2.X.Should().Be(1);
+            p2.Y.Should().Be(1);
             Action a4 = () => s.AddStation("Chatelet", 0, 0);
             a4.ShouldThrow<ArgumentException>();
             Action a5 = () => s.AddStation("Chatelet", 10, 0);
@@ -161,14 +161,14 @@ namespace ITI.TrainSerialization.Tests
             Action a7 = () => s.AddStation("Same Place Station", 0, 0);
             a7.ShouldThrow<ArgumentException>();
 
-            p1.GetType().GetProperty("Name").GetSetMethod().Should().BeNull("Lane.X must NOT be writeable.");
+            p1.GetType().GetProperty("Name").GetSetMethod().Should().BeNull("Lane.Name must NOT be writeable.");
             p1.GetType().GetProperty("X").GetSetMethod().Should().BeNull("Lane.X must NOT be writeable.");
             p1.GetType().GetProperty("Y").GetSetMethod().Should().BeNull("Lane.Y must NOT be writeable.");
             p1.GetType().GetConstructors(BindingFlags.Instance | BindingFlags.Public).Should().BeEmpty("Train must not expose any public constructors.");
 
         }
         [Test]
-        public void T6_line_with_no_stations_doesnt_throe()
+        public void T6_line_with_no_stations_doesnt_throw()
         {
             ICity s = CityFactory.CreateCity("Paris");
 

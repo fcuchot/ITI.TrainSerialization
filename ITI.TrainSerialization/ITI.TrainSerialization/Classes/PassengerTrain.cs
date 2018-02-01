@@ -14,14 +14,12 @@ namespace ITI.TrainSerialization.Classes
         int _nbEconomicClassSeats;
         int _capacity;
 
-        public PassengerTrain(int nbFirstClassSeats, int nbEconomicClassSeats, int capacity, string name, Company company, Line assignement) : base(name, company, assignement)
+        public PassengerTrain(int nbFirstClassSeats, int nbEconomicClassSeats, int capacity, string name, Company company, Line assignement)
+            : base(name, company, assignement)
         {
             NbFirstClassSeats = nbFirstClassSeats;
             NbEconomicClassSeats = nbEconomicClassSeats;
             Capacity = capacity;
-            this.Name = name;
-            this.Company = company;
-            this.Assignment = assignement;
         }
 
         public int NbFirstClassSeats { get => _nbFirstClassSeats; set => _nbFirstClassSeats = value; }

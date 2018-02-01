@@ -60,6 +60,7 @@
     <Compile Include="T2TestsObjectNaming.cs" />
     <Compile Include="T3TestsTrainLine.cs" />
     <Compile Include="T4TestsLineStations.cs" />
+    <Compile Include="T6TestBinarySerialization.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ITI.TrainSerialization\ITI.TrainSerialization.csproj">

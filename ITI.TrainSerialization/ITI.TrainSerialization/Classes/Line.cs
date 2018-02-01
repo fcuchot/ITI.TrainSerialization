@@ -14,7 +14,7 @@ namespace ITI.TrainSerialization.Classes
         IEnumerable<IStation> _stations;
         IEnumerable<ITrain> _trains;
 
-        public Line(string name, ICity city, IEnumerable<IStation> stations, IEnumerable<ITrain> trains)
+        internal Line(string name, ICity city, IEnumerable<IStation> stations, IEnumerable<ITrain> trains)
         {
             Name = name;
             City = city;
@@ -22,8 +22,14 @@ namespace ITI.TrainSerialization.Classes
             Trains = trains;
         }
 
-        public string Name { get => _name; set => _name = value; }
-        public ICity City { get => _city; set => _city = value; }
+        internal Line(string name, ICity city)
+        {
+            Name = name;
+            City = city;
+        }
+
+        public string Name { get => _name; private set => _name = value; }
+        public ICity City { get => _city; private set => _city = value; }
         public IEnumerable<IStation> Stations { get => _stations; set => _stations = value; }
         public IEnumerable<ITrain> Trains { get => _trains; set => _trains = value; }
 
