@@ -7,8 +7,8 @@
     <ProjectGuid>{123DD212-18D2-4E29-B422-63B252717AE5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ITI.PrimarySchool.Tests</RootNamespace>
-    <AssemblyName>ITI.PrimarySchool.Tests</AssemblyName>
+    <RootNamespace>ITI.TrainSerialization.Tests</RootNamespace>
+    <AssemblyName>ITI.TrainSerialization.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
