@@ -43,7 +43,9 @@
     <Compile Include="CityFactory.cs" />
     <Compile Include="Interfaces\ICity.cs" />
     <Compile Include="Interfaces\ICompany.cs" />
+    <Compile Include="Interfaces\IFreightTrain.cs" />
     <Compile Include="Interfaces\ILine.cs" />
+    <Compile Include="Interfaces\IPassengerTrain.cs" />
     <Compile Include="Interfaces\IStation.cs" />
     <Compile Include="Interfaces\ITrain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

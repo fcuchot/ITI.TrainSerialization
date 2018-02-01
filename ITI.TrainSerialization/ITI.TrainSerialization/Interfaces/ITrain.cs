@@ -6,5 +6,7 @@
         ICompany Company { get; }
         ILine Assignment { get; }
         void AssignTo(ILine l);
+        
     }
+
 }
