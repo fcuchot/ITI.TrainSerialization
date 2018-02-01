@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Linq;
+using FluentAssertions;
 
 namespace ITI.TrainSerialization.Tests
 {
@@ -17,16 +18,16 @@ namespace ITI.TrainSerialization.Tests
             ITrain t1 = c.AddTrain("RER1");
             ITrain t2 = c.AddTrain("RER2");
 
-            Assert.That(t1.Assignment, Is.Null);
-            Assert.That(t2.Assignment, Is.Null);
-
+            t1.Assignment.Should().BeNull();
+            t2.Assignment.Should().BeNull();
+          
             ILine l = s.AddLine("RER A");
 
             t1.AssignTo(l);
-            Assert.That(t1.Assignment, Is.SameAs(l));
-            Assert.That(t2.Assignment, Is.Null);
-            Assert.AreEqual(l.Trains.Count(), 1);
-            Assert.That(l.Trains.Single(), Is.SameAs(t1));
+            t1.Assignment.Should().BeSameAs(l);
+            t2.Should().BeNull();
+            l.Trains.Count().Should().Be(1);
+            l.Trains.Single().Should().BeSameAs(t1);
         }
 
         [Test]
@@ -40,12 +41,12 @@ namespace ITI.TrainSerialization.Tests
 
             t1.AssignTo(l1);
 
-            Assert.That(t1.Assignment, Is.SameAs(l1));
-
+            t1.Assignment.Should().BeSameAs(l1);
+            
             t1.AssignTo(l2);
-            Assert.That(t1.Assignment, Is.SameAs(l2));
-            Assert.AreEqual(l1.Trains.Count(), 0);
-            Assert.That(l2.Trains.Single(), Is.SameAs(t1));
+            t1.Assignment.Should().BeSameAs(l2);
+            l1.Trains.Count().Should().Be(0);
+            l2.Trains.Single().Should().BeSameAs(t1);
         }
 
         [Test]
@@ -61,8 +62,11 @@ namespace ITI.TrainSerialization.Tests
             ILine l2 = s2.AddLine("RER A");
             ITrain t2 = c2.AddTrain("RER1");
 
-            Assert.DoesNotThrow(() => t1.AssignTo(l1));
-            Assert.Throws<ArgumentException>(() => t1.AssignTo(l2));
+            Action a1 = () => t1.AssignTo(l1);
+            Action a2 = () => t1.AssignTo(l2);
+            a1.ShouldNotThrow();
+            a2.ShouldThrow<ArgumentException>();
+
         }
 
         [Test]
@@ -73,14 +77,15 @@ namespace ITI.TrainSerialization.Tests
             ILine l1 = s1.AddLine("RER A");
             ITrain t1 = c1.AddTrain("RER1");
 
-            Assert.DoesNotThrow(() => t1.AssignTo(null));
+            Action a1 = () => t1.AssignTo(null);
+            a1.ShouldNotThrow();
 
             t1.AssignTo(l1);
-            Assert.That(t1.Assignment, Is.SameAs(l1));
+            t1.Assignment.Should().BeSameAs(l1);
 
             t1.AssignTo(null);
-            Assert.That(t1.Assignment, Is.Null);
-            Assert.AreEqual(l1.Trains.Count(), 0);
+            t1.Assignment.Should().BeNull();
+            l1.Trains.Count().Should().Be(0);
         }
         [Test]
         public void T5_line_can_have_mutiple_trains()
@@ -93,12 +98,12 @@ namespace ITI.TrainSerialization.Tests
 
             t1.AssignTo(l1);
             t2.AssignTo(l1);
-            Assert.AreEqual(l1.Trains.Count(), 2);
-            Assert.That(l1.Trains.Contains(t1));
-            Assert.That(l1.Trains.Contains(t2));
+            l1.Trains.Count().Should().Be(2);
+            l1.Trains.Contains(t1).Should().BeTrue();
+            l1.Trains.Contains(t2).Should().BeTrue();
 
             t1.AssignTo(null);
-            Assert.That(l1.Trains.Single(), Is.SameAs(t2));
+            l1.Trains.Single().Should().BeSameAs(t2);
 
         }
     }

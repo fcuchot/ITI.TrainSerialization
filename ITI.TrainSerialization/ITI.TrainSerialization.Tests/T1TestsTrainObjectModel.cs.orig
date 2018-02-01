@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using NUnit.Framework;
 using ITI.TrainSerialization.Interfaces;
+<<<<<<< HEAD
 using FluentAssertions;
+=======
 
+
+>>>>>>> TPE_Dev
 namespace ITI.TrainSerialization.Tests
 {
     [TestFixture]

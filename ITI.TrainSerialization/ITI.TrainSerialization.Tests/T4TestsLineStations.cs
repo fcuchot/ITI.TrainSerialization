@@ -2,6 +2,8 @@
 using NUnit.Framework;
 using System;
 using System.Linq;
+using FluentAssertions;
+
 
 namespace ITI.TrainSerialization.Tests
 {
@@ -17,36 +19,47 @@ namespace ITI.TrainSerialization.Tests
             IStation s1 = c.AddStation("Opera", 0, 0);
             IStation s2 = c.AddStation("Chatelet", 1, 1);
 
-            Assert.AreEqual(l1.Stations.Count(), 0);
-            Assert.AreEqual(s1.Lines.Count(), 0);
-            Assert.AreEqual(s2.Lines.Count(), 0);
+            l1.Stations.Count().Should().Be(0);
+            s1.Lines.Count().Should().Be(0);
+            s2.Lines.Count().Should().Be(0);
 
-            Assert.Throws<ArgumentException>(() => l1.AddBefore(null, null));
+            Action a1 = () => l1.AddBefore(null, null);
+            a1.ShouldThrow<ArgumentException>();
 
-            Assert.DoesNotThrow(() => l1.AddBefore(s1, null));
-            Assert.That(l1.Next(s1), Is.Null);
-            Assert.That(l1.Previous(s1), Is.Null);
+            Action a2 = () => l1.AddBefore(s1, null);
+            a2.ShouldNotThrow();
 
-            Assert.AreEqual(s1.Lines.Count(), 1);
-            Assert.AreEqual(s2.Lines.Count(), 0);
-            Assert.That(s1.Lines.Single(), Is.SameAs(l1));
+            l1.Next(s1).Should().BeNull();
+            l1.Previous(s1).Should().BeNull();
 
-            Assert.Throws<ArgumentException>(() => l1.Next(s2));
-            Assert.Throws<ArgumentException>(() => l1.Previous(s2));
+            s1.Lines.Count().Should().Be(1);
 
-            Assert.That(l1.Stations.Single(), Is.SameAs(s1));
-            Assert.DoesNotThrow(() => l1.AddBefore(s2, s1));
-            Assert.Equals(l1.Stations.Count(), 2);
+            s1.Lines.Count().Should().Be( 1);
+            s2.Lines.Count().Should().Be( 0);
+            s1.Lines.Single().Should().BeSameAs(l1);
 
-            Assert.AreEqual(s1.Lines.Count(), 1);
-            Assert.AreEqual(s2.Lines.Count(), 1);
+            Action a3 = () => l1.Next(s2);
+            a3.ShouldThrow<ArgumentException>();
 
-            Assert.That(l1.Next(s2), Is.SameAs(s1));
-            Assert.That(l1.Previous(s1), Is.SameAs(s2));
-            Assert.That(l1.Next(s1), Is.Null);
-            Assert.That(l1.Previous(s2), Is.Null);
-            Assert.That(s1.Lines.Single(), Is.SameAs(l1));
-            Assert.That(s2.Lines.Single(), Is.SameAs(l1));
+            Action a4 = () => l1.Previous(s2);
+            a4.ShouldThrow<ArgumentException>();
+
+            l1.Stations.Single().Should().BeSameAs(s1);
+
+            Action a5 = () => l1.AddBefore(s2, s1);
+            a5.ShouldNotThrow();
+
+            l1.Stations.Count().Should().Be(2);
+
+            s1.Lines.Count().Should().Be(1);
+            s2.Lines.Count().Should().Be(1);
+
+            l1.Next(s2).Should().BeSameAs(s1);
+            l1.Previous(s1).Should().BeSameAs(s2);
+            l1.Next(s1).Should().BeNull();
+            l1.Previous(s2).Should().BeNull();
+            s1.Lines.Single().Should().BeSameAs(l1);
+            s2.Lines.Single().Should().BeSameAs(l1);
 
         }
 
@@ -59,16 +72,19 @@ namespace ITI.TrainSerialization.Tests
 
             IStation s = c.AddStation("Opera", 0, 0);
 
-            Assert.DoesNotThrow(() => l1.AddBefore(s, null));
-            Assert.DoesNotThrow(() => l2.AddBefore(s, null));
+            Action a1 = () => l1.AddBefore(s, null);
+            a1.ShouldNotThrow();
 
-            Assert.That(l1.Stations.Single(), Is.SameAs(l2.Stations.Single()));
-            Assert.That(l1.Stations.Single(), Is.SameAs(s));
-            Assert.That(l2.Stations.Single(), Is.SameAs(s));
-            Assert.AreEqual(s.Lines.Count(), 2);
+            Action a2 = () => l2.AddBefore(s, null);
+            a2.ShouldNotThrow();
 
-            Assert.IsTrue(s.Lines.Contains(l1));
-            Assert.IsTrue(s.Lines.Contains(l2));
+            l1.Stations.Single().Should().BeSameAs(l2.Stations.Single());
+            l1.Stations.Single().Should().BeSameAs(s);
+            l2.Stations.Single().Should().BeSameAs(s);
+            s.Lines.Count().Should().Be( 2);
+
+            s.Lines.Contains(l1).Should().BeTrue();
+            s.Lines.Contains(l2).Should().BeTrue();
         }
 
         [Test]
@@ -79,7 +95,9 @@ namespace ITI.TrainSerialization.Tests
             IStation s = c.AddStation("Opera", 0, 0);
 
             l.AddBefore(s);
-            Assert.Throws<ArgumentException>(() => l.AddBefore(s));
+
+            Action a1 = () => l.AddBefore(s);
+            a1.ShouldThrow<ArgumentException>();
         }
 
         [Test]
@@ -88,11 +106,17 @@ namespace ITI.TrainSerialization.Tests
             ICity c = CityFactory.CreateCity("Paris");
             ILine l = c.AddLine("RER B");
             IStation s = c.AddStation("Opera", 0, 0);
-            Assert.Throws<ArgumentException>(() => l.Remove(s));
+
+            Action a1 = () => l.Remove(s);
+            a1.ShouldThrow<ArgumentException>();
+
             l.AddBefore(s);
-            Assert.DoesNotThrow(() => l.Remove(s));
-            Assert.AreEqual(l.Stations.Count(), 0);
-            Assert.AreEqual(s.Lines.Count(), 0);
+
+            Action a2 = () => l.Remove(s);
+            a2.ShouldNotThrow();
+
+            l.Stations.Count().Should().Be(0);
+            s.Lines.Count().Should().Be(0);
         }
         [Test]
         public void T5_stations_can_be_removed_then_re_added()
@@ -102,14 +126,16 @@ namespace ITI.TrainSerialization.Tests
             IStation s = c.AddStation("Opera", 0, 0);
 
             l.AddBefore(s);
-            Assert.AreEqual(s.Lines.Count(), 1);
+            s.Lines.Count().Should().Be(1);
 
             l.Remove(s);
-            Assert.AreEqual(s.Lines.Count(), 0);
+            s.Lines.Count().Should().Be(0);
 
-            Assert.DoesNotThrow(() => l.AddBefore(s));
-            Assert.AreEqual(l.Stations.Count(), 01);
-            Assert.AreEqual(s.Lines.Count(), 1);
+            Action a1 = () => l.AddBefore(s);
+            a1.ShouldNotThrow();
+
+            l.Stations.Count().Should().Be(1);
+            s.Lines.Count().Should().Be(1);
 
         }
         [Test]
@@ -128,13 +154,13 @@ namespace ITI.TrainSerialization.Tests
             l.AddBefore(s3);
             l.AddBefore(s4);
 
-            Assert.AreEqual(l.Stations.Count(), 5);
-            Assert.That(l.Previous(s), Is.Null);
-            Assert.That(l.Next(s), Is.SameAs(s1));
-            Assert.That(l.Next(s1), Is.SameAs(s2));
-            Assert.That(l.Next(s2), Is.SameAs(s3));
-            Assert.That(l.Next(s3), Is.SameAs(s4));
-            Assert.That(l.Next(s4), Is.Null);
+            l.Stations.Count().Should().Be( 5);
+            l.Previous(s).Should().BeNull();
+            l.Next(s).Should().BeSameAs(s1);
+            l.Next(s1).Should().BeSameAs(s2);
+            l.Next(s2).Should().BeSameAs(s3);
+            l.Next(s3).Should().BeSameAs(s4);
+            l.Next(s4).Should().BeNull();
         }
     }
 }
