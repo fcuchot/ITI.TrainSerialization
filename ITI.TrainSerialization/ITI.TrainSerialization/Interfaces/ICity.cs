@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 ﻿using System;
 namespace ITI.TrainSerialization.Interfaces
 
-=======
-namespace ITI.TrainSerialization.Interfaces
->>>>>>> master
+
 {
     
     public interface ICity
