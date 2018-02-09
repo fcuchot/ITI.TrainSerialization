@@ -1,4 +1,4 @@
-﻿using ITI.TrainSerialization.Interfaces;
+using ITI.TrainSerialization.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace ITI.TrainSerialization.Classes
             StationList = new List<IStation>();
             CompanyList = new List<ICompany>();
             LineList = new List<ILine>();
-        }
+        }        
 
         public string Name
         {
@@ -103,6 +103,7 @@ namespace ITI.TrainSerialization.Classes
 
             return null;
         }
+
         public ILine AddLine(string name)
         {
             if (name == null || name == String.Empty)
@@ -126,6 +127,7 @@ namespace ITI.TrainSerialization.Classes
 
             return null;
         }
+
         public IStation AddStation(string name, int x, int y)
         {
             if (name == null || name == String.Empty)
@@ -133,7 +135,7 @@ namespace ITI.TrainSerialization.Classes
 
             var StationWithSameNameAlreadyExist = FindStation(name);
 
-            if (StationWithSameNameAlreadyExist != null)
+            if( StationWithSameNameAlreadyExist != null || _stationList.Any( lambdaX => lambdaX.X == x && lambdaX.Y == y ))
                 throw new ArgumentException("a line with the same name already exist for this city");
 
             IStation newStation = new Station(name, this, x, y);
@@ -149,13 +151,34 @@ namespace ITI.TrainSerialization.Classes
 
             return null;
         }
+
         public IStation FindNearestStation(int x, int y)
         {
-            throw new NotImplementedException();
-        }
-        public bool CanGo(IStation from, IStation to)
-        {
-            throw new NotImplementedException();
+            if( _stationList.Count == 0 )
+                return null;
+
+            double xDist;
+            double yDist;
+            List<KeyValuePair<Station, double>> stationCoord = new List<KeyValuePair<Station, double>>();
+
+            foreach( Station station in _stationList )
+            {
+                if( station.X == x && station.Y == y )
+                    return station;
+
+                xDist = Math.Pow( Math.Max( x, station.X ) - Math.Min( x, station.X ), 2 );
+                yDist = Math.Pow( Math.Max( y, station.Y ) - Math.Min( y, station.Y ), 2 );
+
+                stationCoord.Add( new KeyValuePair<Station, double>( station, Math.Sqrt( xDist + yDist ) ) );
+            }
+
+            stationCoord.Sort( ( xx, yy ) => xx.Value.CompareTo( yy.Value ) );
+
+            if( stationCoord.Count > 1 && stationCoord[0].Value == stationCoord[1].Value )
+            {
+                return stationCoord.LastOrDefault().Key;
+            }
+            return stationCoord.FirstOrDefault().Key;
         }
     }
 }

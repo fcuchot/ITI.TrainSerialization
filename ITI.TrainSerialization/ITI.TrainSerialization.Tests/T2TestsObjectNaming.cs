@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using NUnit.Framework;
 using ITI.TrainSerialization.Interfaces;
@@ -49,7 +49,7 @@ namespace ITI.TrainSerialization.Tests
 
             ILine l1 = c.AddLine("1");
             c.FindLine("1").Should().BeSameAs(l1);
-            c.FindLine("1").Should().BeNull();
+            c.FindLine("2").Should().BeNull();
           
 
             ILine l2 = c.AddLine("2");
@@ -92,8 +92,6 @@ namespace ITI.TrainSerialization.Tests
             s.FindStation("Chatelet").Should().BeSameAs(c2);
             s.FindStation("Ivry").Should().BeNull();
 
-
-
             IStation c3 = s.AddStation("Ivry", 2, 2);
             IStation c4 = s.AddStation("Villejuif", 3, 3);
             IStation c5 = s.AddStation("Bourse", 4, 4);
@@ -102,7 +100,7 @@ namespace ITI.TrainSerialization.Tests
             s.FindStation("Chatelet").Should().BeSameAs(c2);
             s.FindStation("Ivry").Should().BeSameAs(c3);
             s.FindStation("Villejuif").Should().BeSameAs(c4);
-            s.FindCompany("Bourse").Should().BeSameAs(c5);
+            s.FindStation("Bourse").Should().BeSameAs(c5);
         }
         [Test]
         public void T4_trains_can_be_found_by_name()

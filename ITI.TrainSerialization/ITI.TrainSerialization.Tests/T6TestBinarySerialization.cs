@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +7,11 @@ using FluentAssertions;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using ITI.TrainSerialization.Interfaces;
+using ITI.TrainSerialization.Serialization;
+using Newtonsoft.Json;
+using FluentAssertions;
+
 
 namespace ITI.TrainSerialization.Tests
 {
@@ -14,42 +19,34 @@ namespace ITI.TrainSerialization.Tests
     class T6TestBinarySerialization
     {
         [Test]
-        public void save_and_load_school()
+        public void save_and_load_city()
         {
-            //MemoryStream mem = new MemoryStream();
-            //School s = CreateTestSchool();
+            ICity city = CreateTestCity();
 
-            //// Act
-            //f.Serialize(mem, s);
-            //mem.Position = 0;
-            //School s2 = (School)f.Deserialize(mem);
+            // Act
+            Stream stream = BinarySerialization.Serialize(city);
+            stream.Position = 0;
+            ICity city2 = BinarySerialization.Deserialize<ICity>(stream);
 
-            //// Assert
-            //Assert.That(s2.Name, Is.EqualTo(s.Name));
-            //Assert.That(s2.FindTeacher("Paul"), Is.Not.Null);
-            //Assert.That(s2.FindTeacher("John"), Is.Not.Null);
-            //Assert.That(s2.FindTeacher("Albert"), Is.Not.Null);
+            // Assert
 
-            //Assert.That(s2.FindTeacher("Albert").School, Is.SameAs(s2));
-            //Assert.That(s2.FindTeacher("Albert").Assignment, Is.SameAs(s2.FindClassRoom("E01")));
-
+            city2.Name.Should().BeEquivalentTo(city.Name);
+            city2.FindCompany( "C01" ).Should().NotBeNull();
+            city2.FindCompany( "C02" ).Should().NotBeNull();
+            city2.FindCompany( "C01" ).City.Should().BeSameAs( city2 );
+         
         }
 
-        //private static School CreateTestSchool()
-        //{
-        //    School s = new School("First School");
-        //    Teacher albert = s.AddTeacher("Albert");
-        //    Teacher john = s.AddTeacher("John");
-        //    Teacher paul = s.AddTeacher("Paul");
-        //    Classroom e01 = s.AddClassRoom("E01");
-        //    Classroom e03 = s.AddClassRoom("E03");
-        //    albert.AssignTo(e01);
-        //    john.AssignTo(e03);
-        //    e01.AddPupil("Simon", "Jouatel");
-        //    e01.AddPupil("Albert", "Einstein");
-        //    e03.AddPupil("Olivier", "Spinelli");
-        //    return s;
-        //}
+        private static ICity CreateTestCity()
+        {
+            ICity city = CityFactory.CreateCity("First City");
+            ICompany c1 = city.AddCompany("C01");
+            ITrain t1 = c1.AddTrain("T01");
+            ICompany c2 = city.AddCompany("C02");
+            ITrain t2 = c2.AddTrain("T02");
+
+            return city;
+        }
     }
 }
 

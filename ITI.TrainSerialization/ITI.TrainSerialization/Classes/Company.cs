@@ -1,4 +1,4 @@
-﻿using ITI.TrainSerialization.Interfaces;
+using ITI.TrainSerialization.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿using ITI.TrainSerialization.Interfaces;
+using ITI.TrainSerialization.Interfaces;
 using NUnit.Framework;
 using System;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace ITI.TrainSerialization.Tests
 
             t1.AssignTo(l);
             t1.Assignment.Should().BeSameAs(l);
-            t2.Should().BeNull();
+            t2.Assignment.Should().BeNull();
             l.Trains.Count().Should().Be(1);
             l.Trains.Single().Should().BeSameAs(t1);
         }
