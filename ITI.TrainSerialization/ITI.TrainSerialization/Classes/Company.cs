@@ -1,4 +1,4 @@
-﻿using ITI.TrainSerialization.Interfaces;
+using ITI.TrainSerialization.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,6 @@ namespace ITI.TrainSerialization.Classes
     {
         string _name;
         List<ITrain> _trainList;
-        [NonSerialized]
         ICity _city;
 
 
