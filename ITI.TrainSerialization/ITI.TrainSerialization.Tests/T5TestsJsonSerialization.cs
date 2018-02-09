@@ -15,71 +15,54 @@ namespace ITI.TrainSerialization.Tests
  
     class T5TestsJsonSerialization
     {
+
         [Test]
-       public void T1_type_and_properties_must_be_serializable(Type type)
+        public void T1_type_and_properties_must_be_serializable()
+        {
+            var c1 = CreateTestCity();
+            var c1Type = c1.GetType();
+            c1Type.IsSerializable.Should().BeTrue(c1Type + " must be marked [Serializable]");
+
+        }
+        [Test]
+        public void T2_city_is_serialized()
         {
 
-            if (type.IsValueType || type == typeof(string)) return;
-            type.IsSerializable.Should().BeTrue(type + " must be marked [Serializable]");
-                     
-            foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
-            {
-                if (propertyInfo.PropertyType.IsGenericType)
-                {
-                    foreach (var genericArgument in propertyInfo.PropertyType.GetGenericArguments())
-                    {
-                        if (genericArgument == type) continue;
-                        T1_type_and_properties_must_be_serializable(genericArgument);
-                    }
-                }
-                else if (propertyInfo.GetType() != type)
-                    T1_type_and_properties_must_be_serializable(propertyInfo.PropertyType);
-            }
+            var c1 = CreateTestCity();
+            var serializedCity = Serialization.JSONSerialization.Serialize(c1);
+
+            serializedCity.Should().BeOfType<string>();
+
+
         }
         
-        public void T2_train_station_must_be_serializable()
+        private static ICity CreateTestCity()
         {
-           
-            //City s = new City()
-            //IStation station1 = s.AddStation("Opera", 0, 0);
+            ICity city = CityFactory.CreateCity("Paris");
+            ICompany company = city.AddCompany("ITICORP");
+            ITrain train = company.AddTrain("TGV");
 
-            
-            
+            return city;
         }
-        public static void ShouldDeepEqual<T>(T expected, T actual)
-        {
-            Assert.IsInstanceOf(expected.GetType(), actual);
-            var serializedExpected = Serialize(expected);
-            var serializedActual = Serialize(actual);
-            serializedExpected.Should().Equals(serializedActual);
-            
-        }
+
+      
         [Test]
         public void T3_train_propoerties_should_be_serializable()
         {
+            var citySerialized = @"{
+   'Name': 'Paris',
+'StationList' : [],
+'CompanyList' : [
+'Name', 'ITICORP'
+],
+'LineList' : []
+  
+ }";
+            var cityDeserialized = Serialization.JSONSerialization.Deserialize<ICity>(citySerialized);
 
-        
+            cityDeserialized.Should().BeOfType<ICity>();
         }  
-        public static string Serialize<T>(T obj)
-        {
-            if (obj == null)
-            {
-                return string.Empty;
-            }
-
-            try
-            {
-                var stream1 = new MemoryStream();
-              //  var ser = JsonConvert.SerializeObject(obj);
-                ser.WriteObject(stream1, obj);
-                stream1.Position = 0;
-                var streamReader = new StreamReader(stream1);
-                return streamReader.ReadToEnd();
-            }
-            catch (Exception e)
-            {
-                return string.Empty;
-            }
-        }
+       
     }
 }
+

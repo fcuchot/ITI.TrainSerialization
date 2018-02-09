@@ -15,14 +15,14 @@ namespace ITI.TrainSerialization.Classes
         ICity _city;
 
 
-        internal Company(string name, ICity city, List<ITrain> trainList)
+        public Company(string name, ICity city, List<ITrain> trainList)
         {
             Name = name;
             City = city;
             TrainList = trainList;
         }
 
-        internal Company(string name, ICity city)
+        public Company(string name, ICity city)
         {
             Name = name;
             City = city;

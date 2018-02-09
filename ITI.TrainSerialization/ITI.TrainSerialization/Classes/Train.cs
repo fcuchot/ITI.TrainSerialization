@@ -14,13 +14,13 @@ namespace ITI.TrainSerialization.Classes
         ILine _assignment;
         ICity _city;
 
-        internal Train(string name, ICompany company, ILine assignment)
+        public Train(string name, ICompany company, ILine assignment)
         {
             Name = name;
             Company = company;
             Assignment = _assignment;
         }
-        internal Train(string name, ICompany company, ICity city)
+        public Train(string name, ICompany company, ICity city)
         {
             Name = name;
             Company = company;

@@ -1,5 +1,8 @@
-﻿namespace ITI.TrainSerialization.Interfaces
+﻿using System;
+namespace ITI.TrainSerialization.Interfaces
+
 {
+    
     public interface ICity
     {
         string Name { get; }

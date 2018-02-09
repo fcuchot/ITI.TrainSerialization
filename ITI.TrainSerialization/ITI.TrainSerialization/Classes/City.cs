@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ITI.TrainSerialization.Classes
 {
+    [Serializable]
     class City : ICity
     {
         string _name;
