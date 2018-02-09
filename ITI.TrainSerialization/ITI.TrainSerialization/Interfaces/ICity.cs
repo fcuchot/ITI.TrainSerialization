@@ -1,4 +1,4 @@
-﻿namespace ITI.TrainSerialization.Interfaces
+namespace ITI.TrainSerialization.Interfaces
 {
     public interface ICity
     {
@@ -10,7 +10,6 @@
         IStation AddStation(string name, int x, int y);
         IStation FindStation(string name);
         IStation FindNearestStation(int x, int y);
-        bool CanGo(IStation from, IStation to);
 
     }
 }

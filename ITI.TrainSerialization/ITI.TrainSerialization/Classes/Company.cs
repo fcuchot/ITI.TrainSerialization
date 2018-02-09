@@ -12,6 +12,7 @@ namespace ITI.TrainSerialization.Classes
     {
         string _name;
         List<ITrain> _trainList;
+        [NonSerialized]
         ICity _city;
 
 
